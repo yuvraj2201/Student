@@ -1,0 +1,31 @@
+
+type Query {
+    studentById(id: ID): Student
+}
+
+type Student{
+    id: ID
+    name: String
+    identity:Identity
+}
+
+type Identity{
+    Id :ID
+    dob:Int
+    Enum : Course
+    Enum:Committee
+}
+
+enum Course {
+    HUMANITIES
+    COMMERCE
+    SCIENCE
+    BIOLOGY
+}
+
+enum Committee {
+    HEALTH
+    FINANCE
+    TRAINING
+    EVENT
+}
