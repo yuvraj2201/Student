@@ -10,7 +10,7 @@ type Student{
 }
 
 type Identity{
-    Id :ID
+    id :ID
     dob:Int
     Enum : Course
     Enum:Committee
