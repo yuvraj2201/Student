@@ -6,23 +6,22 @@ import com.service.dataAccessService.student.internal.database.constant.Committe
 import com.service.dataAccessService.student.internal.database.constant.Course;
 import graphql.com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;
-import graphql.schema.DataFetchingEnvironment;
-
-import jakarta.inject.Inject;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class GraphQLDataFetchers implements DataFetcher {
+public class GraphQLDataFetchers {
 
-    private static List<Map<String,Student>> students = Arrays.asList(
-            ImmutableMap.of("1",new Student("1", "Yuvraj", new Identity("101", 26, Course.SCIENCE, Committee.TRAINING))),
-            ImmutableMap.of("2",new Student("1", "Ashwin", new Identity("102", 25, Course.COMMERCE, Committee.EVENT))),
-            ImmutableMap.of("3",new Student("3", "Kapil", new Identity("103", 27, Course.BIOLOGY, Committee.FINANCE)))
-            );
+    private static List<Map<String, Student>> students = Arrays.asList(
+            ImmutableMap.of("1", new Student("1", "Yuvraj",
+                    new Identity("101", 26, Course.SCIENCE, Committee.TRAINING))),
+            ImmutableMap.of("2", new Student("1", "Ashwin",
+                    new Identity("102", 25, Course.COMMERCE, Committee.EVENT))),
+            ImmutableMap.of("3", new Student("3", "Kapil",
+                    new Identity("103", 27, Course.BIOLOGY, Committee.FINANCE)))
+    );
 
     public DataFetcher getStudentByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -39,10 +38,5 @@ public class GraphQLDataFetchers implements DataFetcher {
         return DataFetchingEnvironment -> {
             return students;
         };
-    }
-
-    @Override
-    public Object get(DataFetchingEnvironment environment) throws Exception {
-        return null;
     }
 }

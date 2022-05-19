@@ -40,11 +40,6 @@ public class GraphQLFactory {
         GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
 
         return GraphQL.newGraphQL(graphQLSchema).build();
-
-
-
-
-
     }
 
 }
