@@ -6,12 +6,13 @@ import com.service.dataAccessService.student.internal.database.constant.Committe
 import com.service.dataAccessService.student.internal.database.constant.Course;
 import graphql.com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;
+import io.micronaut.context.annotation.Bean;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-
+@Bean
 public class GraphQLDataFetchers {
 
     private static List<Map<String, Student>> students = Arrays.asList(

@@ -13,32 +13,37 @@ import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.core.io.ResourceResolver;
 import jakarta.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
+
 @Factory
 public class GraphQLFactory {
-
+    private static final Logger logger = LoggerFactory.getLogger(GraphQLFactory.class);
     @Bean
     @Singleton
     GraphQL graphQL(ResourceResolver resourceResolver, GraphQLDataFetchers graphQLDataFetchers) {
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
 
-        // Parse the schema.
+        logger.info("Parse the Schema");
         TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
         typeRegistry.merge(schemaParser.parse(new BufferedReader(new InputStreamReader(
                 resourceResolver.getResourceAsStream("classpath:schema.graphqls").get()))));
 
-        // Create the runtime wiring.
+        logger.info("Creating the runtime wiring");
         RuntimeWiring runtimeWiring = RuntimeWiring.newRuntimeWiring()
-                .type("Query", typeWiring -> typeWiring
-                        .dataFetcher("studentById",graphQLDataFetchers.getStudentByIdDataFetcher()))
-                        .build();
+                .type(newTypeWiring("Query")
+                        .dataFetcher("studentById", graphQLDataFetchers.getStudentByIdDataFetcher()))
+                .build();
 
         GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
 
+        logger.info("runtime wiring completed");
         return GraphQL.newGraphQL(graphQLSchema).build();
     }
 
