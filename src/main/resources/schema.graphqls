@@ -12,8 +12,8 @@ type Student{
 type Identity{
     id :ID
     dob:Int
-    Enum :Course
-    Enum:Committee
+    course:Course
+    committee:Committee
 }
 
 enum Course {

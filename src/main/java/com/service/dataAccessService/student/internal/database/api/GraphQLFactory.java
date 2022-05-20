@@ -40,10 +40,10 @@ public class GraphQLFactory {
                 .type(newTypeWiring("Query")
                         .dataFetcher("studentById", graphQLDataFetchers.getStudentByIdDataFetcher()))
                 .build();
+
         GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
 
         logger.info("runtime wiring completed");
         return GraphQL.newGraphQL(graphQLSchema).build();
     }
-
 }
