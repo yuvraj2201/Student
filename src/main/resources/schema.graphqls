@@ -3,6 +3,11 @@ type Query {
     studentById(id: ID): Student
 }
 
+type Mutation {
+    createStudent(id: ID!, name: String!, identity:IdentityInput):
+    Student
+}
+
 type Student{
     id: ID
     name: String
@@ -12,8 +17,8 @@ type Student{
 type Identity{
     id :ID
     dob:Int
-    course:Course
-    committee:Committee
+    course:[Course]!
+    committee:[Committee]!
 }
 
 enum Course {
@@ -28,4 +33,11 @@ enum Committee {
     FINANCE
     TRAINING
     EVENT
+}
+
+input IdentityInput {
+    id :ID
+    dob:Int
+    course:Course!
+    committee:Committee!
 }

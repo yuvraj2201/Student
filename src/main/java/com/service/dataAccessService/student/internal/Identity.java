@@ -11,6 +11,9 @@ public class Identity {
     private Course course;
     private Committee committee;
 
+    public Identity() {
+    }
+
     public Identity(String id, int birthday, Course course, Committee committee) {
         this.id = id;
         this.birthday = birthday;

@@ -39,6 +39,8 @@ public class GraphQLFactory {
         RuntimeWiring runtimeWiring = RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
                         .dataFetcher("studentById", graphQLDataFetchers.getStudentByIdDataFetcher()))
+                .type(newTypeWiring("Mutation")
+                        .dataFetcher("createStudent", graphQLDataFetchers.setStudentDataFetcher()))
                 .build();
 
         GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
