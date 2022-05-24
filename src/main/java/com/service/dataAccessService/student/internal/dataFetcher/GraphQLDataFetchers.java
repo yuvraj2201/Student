@@ -33,10 +33,7 @@ public class GraphQLDataFetchers {
             Student student = new Student();
             student.setId(dataFetchingEnvironment.getArgument("id"));
             student.setName(dataFetchingEnvironment.getArgument("name"));
-            student.setIdentity(new Identity(dataFetchingEnvironment.getArgument("id"),
-                                             dataFetchingEnvironment.getArgument("dob"),
-                                             dataFetchingEnvironment.getArgument("course"),
-                                             dataFetchingEnvironment.getArgument("committee")));
+            student.setIdentity(dataFetchingEnvironment.getArgumentOrDefault("identity",null));
             Map<String, Student> studentDetail = new HashMap<>();
             studentDetail.put(student.getId(),student);
             return studentDetail;
